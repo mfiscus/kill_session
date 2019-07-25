@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tmp
+
+    docker:
+      - image: circleci/python:latest
+
+    steps:
+      - run:
+          name: Install dependencies
+          command: sudo apt install -y dialog syslog-ng
+
+      - checkout
+
+      - run:
+          name: Start syslog-ng
+          command: sudo service syslog-ng start
+
+      - run:
+          name: Run kill_session.sh
+          command: export TERM=xterm-256color && echo "TERM="${TERM} && chmod +x kill_session.sh && ./kill_session.sh --help
