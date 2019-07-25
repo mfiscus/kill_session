@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/Projects/git-report
+    working_directory: ~/
 
     docker:
       - image: circleci/python:latest
@@ -9,7 +9,7 @@ jobs:
     steps:
       - run:
           name: Install dependencies
-          command: sudo apt install -y dialog jq sqlite3 syslog-ng
+          command: sudo apt install -y dialog syslog-ng
 
       - checkout
 
@@ -18,5 +18,5 @@ jobs:
           command: sudo service syslog-ng start
 
       - run:
-          name: Run git-report.sh
-          command: export TERM=xterm-256color && echo "TERM="${TERM} && chmod +x git-report.sh && ./git-report.sh --help
+          name: Run kill_session.sh
+          command: export TERM=xterm-256color && echo "TERM="${TERM} && chmod +x kill_session.sh && ./kill_session.sh --help
