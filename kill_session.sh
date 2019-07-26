@@ -298,15 +298,6 @@ unset dependancy
 [ $( echo ${BASH_VERSION} | grep -o '^[0-9]' ) -ge 4 ] || __throw_error "Please upgrade to at least bash version 4" ${?}
 
 
-# verify docker is running on this system
-[ $( docker ps &>/dev/null; echo ${?} ) -eq 0 ] || __throw_error "Docker is not running on this host" ${?}
-
-
-# verify there is at least one container running on this system
-[ $( docker ps --filter status=running --format "{{.ID}}" | grep -v ecs | wc -l ) -ge 1 ] || __throw_error "There are no containers running on this host" ${?}
-
-
-
 # Transform long options to short ones
 for argv in "${@}"; do
     case "${argv}" in
@@ -368,6 +359,15 @@ while getopts "${optspec}" opt; do
     esac
 
 done
+
+
+# verify docker is running on this system
+[ $( docker ps &>/dev/null; echo ${?} ) -eq 0 ] || __throw_error "Docker is not running on this host" ${?}
+
+
+# verify there is at least one container running on this system
+[ $( docker ps --filter status=running --format "{{.ID}}" | grep -v ecs | wc -l ) -ge 1 ] || __throw_error "There are no containers running on this host" ${?}
+
 
 # display loading dialog
 [ -z ${quiet:-} ] && __please_wait "Loading "${brand_name}" containers"
