@@ -39,7 +39,7 @@ function __cleanup() {
 
 
 # remove temporary files upon trapping SIGHUP/SIGINT/SIGKILL/SIGTERM/SIGEXIT
-trap __cleanup HUP INT KILL TERM EXIT
+trap __cleanup HUP INT KILL TERM
 
 
 # function to catch error messages
