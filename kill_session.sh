@@ -38,7 +38,7 @@ function __cleanup() {
 }
 
 
-# remove temporary files upon trapping SIGHUP/SIGINT/SIGKILL/SIGTERM/SIGEXIT
+# remove temporary files upon trapping SIGHUP/SIGINT/SIGKILL/SIGTERM
 trap __cleanup HUP INT KILL TERM
 
 
